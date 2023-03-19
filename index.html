@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Homestay Maintenance Form</title>
+  </head>
+  <body>
+    <h1>Homestay Maintenance Form</h1>
+    <form>
+      <label for="reporter">Reporter:</label>
+      <input type="text" id="reporter" name="reporter"><br>
+
+      <label for="description">Problem Description:</label>
+      <textarea id="description" name="description"></textarea><br>
+
+      <label for="unit">House Unit:</label>
+      <input type="text" id="unit" name="unit"><br>
+
+      <label for="due_date">Due Date:</label>
+      <input type="date" id="due_date" name="due_date"><br>
+
+      <label for="priority">Priority:</label>
+      <input type="number" id="priority" name="priority" min="1" max="5"><br>
+
+      <label for="photos">Photos:</label>
+      <input type="file" id="photos" name="photos" accept="image/*" multiple><br>
+
+      <input type="submit" value="Submit">
+	  <script>
+	  // Get the form element
+const form = document.querySelector('form');
+
+// Add a submit event listener to the form
+form.addEventListener('submit', function(event) {
+  // Prevent the form from submitting
+  event.preventDefault();
+
+  // Get the input fields
+  const reporterInput = document.getElementById('reporter');
+  const descriptionInput = document.getElementById('description');
+  const unitInput = document.getElementById('unit');
+  const dueDateInput = document.getElementById('due_date');
+  const priorityInput = document.getElementById('priority');
+  const photosInput = document.getElementById('photos');
+
+  // Validate the reporter field
+  if (reporterInput.value.trim() === '') {
+    alert('Please enter a reporter.');
+    reporterInput.focus();
+    return;
+  }
+
+  // Validate the description field
+  if (descriptionInput.value.trim() === '') {
+    alert('Please enter a problem description.');
+    descriptionInput.focus();
+    return;
+  }
+
+  // Validate the unit field
+  if (unitInput.value.trim() === '') {
+    alert('Please enter a house unit.');
+    unitInput.focus();
+    return;
+  }
+
+  // Validate the due date field
+  const dueDate = new Date(dueDateInput.value);
+  if (isNaN(dueDate.getTime())) {
+    alert('Please enter a valid due date.');
+    dueDateInput.focus();
+    return;
+  }
+
+  // Validate the priority field
+  const priority = parseInt(priorityInput.value);
+  if (isNaN(priority) || priority < 1 || priority > 5) {
+    alert('Please enter a priority between 1 and 5.');
+    priorityInput.focus();
+    return;
+  }
+
+  // Validate the photos field
+  if (photosInput.files.length === 0) {
+    alert('Please upload at least one photo.');
+    photosInput.focus();
+    return;
+  }
+
+  // If all fields are valid, submit the form
+  form.submit();
+});
+
+	  </script>
+    </form>
+  </body>
+</html>
